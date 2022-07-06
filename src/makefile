@@ -1,12 +1,12 @@
-OBJS:=$(patsubst %.c, %, $(wildcard *.c))
+TARGET:=main
+SURC:=$(wildcard *.c)
+OBJS:=$(patsubst %.c,%.o,$(SURC))
 
-OUT: ${OBJS}
+main: $(OBJS)
+	gcc $(OBJS) -o main
 
-%:%.c
-	gcc $^ -o $@
-
-.PHONY: OUT clean rebuild
+.PHONY: clean rebuild
 
 clean:
-	${RM} ${OBJS}
-rebuild:clean OUT
+	${RM} *.o
+rebuild: clean main

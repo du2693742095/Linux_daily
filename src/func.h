@@ -29,3 +29,11 @@
     }
 
 typedef __sighandler_t sighandler_t;
+
+// instruction set
+struct ins_t{
+    int argSize;    // size of arguments
+    char *ins;      // instruction
+    char *arg;      // arguments
+};
+
