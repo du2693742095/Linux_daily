@@ -1,24 +1,25 @@
 #include "func.h"
 
-struct ins_t read_ins(void);
-int excute_ins(struct ins_t command); 
-bool isExit(int stat);
-
 // It will return whether session is closed normaly
-int dsy_loop(void){
-    int stat;
-    do {
+void dsy_loop(void){
+    while(true) {
         puts(">");
 
         struct ins_t instruction = read_ins();
-        stat = excute_ins(instruction);
 
-    } while(isExit(stat));
-    
-    return stat;
-}
+        // use multi-progress
+        int stat = 0;
+        pid_t pid = fork();
+        if(pid == 0){
+            stat = excute_ins(instruction);
+            
+            // decide whether to quit
+            if(stat == -1){
+                kill(0, SIGINT);
+            }
 
-// if stat == -1, means user insert exit.
-bool isExit(int stat){
-    return (stat == -1);
+            exit(0);
+        }
+        wait(NULL);
+    }
 }

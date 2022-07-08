@@ -44,9 +44,42 @@ int dsy_loop(void){
 ### 作用：读入一条命令，并把它存入结构体中，传到执行命令的函数中
 
 ### 操作：
-   1. 读入一段命令
-   2. 存入结构体
+   1. 读入一段命令存在buff中
+   2. 读取buff，拆分以后按指令类型装入结构体
    3. 返回结构体
 
+   - 读取结构体：
 
+```c
+struct ins read_instruction{
+    read(STDIN, buf, sizeof(buf));
 
+    instruction = malloc(sizeof ins);
+    instruction = analyze_ins(buf);
+    
+    return instruction;
+}
+```
+
+    - 分析结构体：
+    1. 构建哈希表，分为指令、参数、地址，指令在第一位，然后有-的为参数，/开头的为地址
+    2. 按照表中的数据将字符串拆分。
+    3. 判断传入的参数是否有误
+
+    例如：ls -la /home ，应该拆分为ls l a /home
+
+```c
+struct ins analyze_ins(char *instruction){
+    int i = 0;
+    char *buf[];
+    int type = 0;       // 表示读取出来的字符的性质，
+                        //1为指令，2为参数，3为地址，默认0为未知
+
+    // 循环将字符串读取完
+    while(instruction[i] != '\n'){
+        // 将字符串按指令、参数、地址拆分
+        
+    }
+    switch(type)
+}
+```

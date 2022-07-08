@@ -1,6 +1,4 @@
-#include <stdio.h>
-
-void dsy_loop();
+#include "func.h"
 
 int main(int argc, char *argv[])
 {
