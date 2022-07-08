@@ -61,12 +61,12 @@ struct ins read_instruction{
 }
 ```
 
-    - 分析结构体：
+   - 分析结构体：
     1. 构建哈希表，分为指令、参数、地址，指令在第一位，然后有-的为参数，/开头的为地址
     2. 按照表中的数据将字符串拆分。
     3. 判断传入的参数是否有误
 
-    例如：ls -la /home ，应该拆分为ls l a /home
+   例如：ls -la /home ，应该拆分为ls l a /home
 
 ```c
 struct ins analyze_ins(char *instruction){
