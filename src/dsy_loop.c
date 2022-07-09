@@ -5,7 +5,7 @@ void dsy_loop(void){
     while(true) {
         puts(">");
 
-        struct ins_t instruction = read_ins();
+        struct ins_t *instruction = read_ins();
 
         // use multi-progress
         int stat = 0;

@@ -16,7 +16,7 @@
 #include <sys/wait.h>   //wait
 #include <signal.h>     //signal, sigaction
 
-#define Error_Equal_Check(data, standard, input)    \
+#define ERROR_EQUAL_CHECK(data, standard, input)    \
     do{                                             \
         if(data == standard){                       \
             perror(input);                          \
@@ -24,7 +24,7 @@
         }                                           \
     } while(0)
 
-#define Error_Unequal_Check(data, standard, input)  \
+#define ERROR_UNEQUAL_CHECK(data, standard, input)  \
     do{                                             \ 
         if(data != standard) {                      \
             puts(input);                            \
@@ -46,10 +46,12 @@ struct arguments_t {
 struct ins_t{
     int argSize;                // size of arguments
     char *ins;                  // instruction
-    struct argments_t *arg;      // arguments
+    struct arguments_t arg;      // arguments
+    // if you want to deal with pipe and reloading, 
+    // there need to add some other element.
+    // such as "int pipe"(descripe where and how many of pipes).
 };
 
 void dsy_loop(void);
 struct ins_t *read_ins(void);
-int excute_ins(struct ins_t command); 
-
+int excute_ins(const struct ins_t *command);
